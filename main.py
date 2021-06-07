@@ -71,7 +71,7 @@ def func(x): #local max 0.7416
 
 class QuadraticApprox():
     def __init__(self) -> None:
-        self.x2_init = float(input("Initial Value of z2:\n"))
+        self.x2_init = float(input("Initial Value of x2:\n"))
         self.h = float(input("Initial Value of h:\n"))
         self.epsilon = float(input("Give Epsilon:\n"))
         self.rel_error = float(input("Give Percent Relative Error: e.g 0.001 = %0.001:\n")) #percent
