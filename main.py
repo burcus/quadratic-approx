@@ -71,39 +71,39 @@ def func(x): #local max 0.7416
 
 class QuadraticApprox():
     def __init__(self) -> None:
-        self.z2_init = float(input("Initial Value of z2:\n"))
+        self.x2_init = float(input("Initial Value of z2:\n"))
         self.h = float(input("Initial Value of h:\n"))
         self.epsilon = float(input("Give Epsilon:\n"))
         self.rel_error = float(input("Give Percent Relative Error: e.g 0.001 = %0.001:\n")) #percent
         self.iter_limit = int(input("Iteration Limit:\n"))
 
     def run(self):
-        z_vals = [self.z2_init-self.h, self.z2_init, self.z2_init+self.h]
+        x_vals = [self.x2_init-self.h, self.x2_init, self.x2_init+self.h]
         iter_count = 0
         error = None #for division by zero error check
 
         for i in itertools.count(start=0):
-            func_vals = [func(z_vals[0]), func(z_vals[1]), func(z_vals[2])]
-            z_new = (z_vals[1] + (((1/2)* self.h)*(func_vals[0]-func_vals[2]) / (func_vals[0] -2*func_vals[1] + func_vals[2])))
-            func_new = func(z_new)
-            if z_vals[1] != 0:
-                error = abs(z_new - z_vals[1])/abs(z_vals[1])*100
+            y_vals = [func(x_vals[0]), func(x_vals[1]), func(x_vals[2])]
+            x_new = (x_vals[1] + (((1/2)* self.h)*(y_vals[0]-y_vals[2]) / (y_vals[0] -2*y_vals[1] + y_vals[2])))
+            func_new = func(x_new)
+            if x_vals[1] != 0:
+                error = abs(x_new - x_vals[1])/abs(x_vals[1])*100
                 if error <= self.rel_error: break
 
-            self.h = (1/4)*(z_vals[2]-z_vals[0])
+            self.h = (1/4)*(x_vals[2]-x_vals[0])
 
-            if func_new > func_vals[1]:
-                z_vals[0] = z_new - self.h
-                z_vals[1] = z_new
-                z_vals[2] = z_new + self.h
+            if func_new > y_vals[1]:
+                x_vals[0] = x_new - self.h
+                x_vals[1] = x_new
+                x_vals[2] = x_new + self.h
 
-            if(abs(z_vals[2]-z_vals[0]) <=  self.epsilon): break
+            if(abs(x_vals[2]-x_vals[0]) <=  self.epsilon): break
             if error != None and error <= self.rel_error: break
             if iter_count >= self.iter_limit: break
             iter_count += 1
 
-        local_max = round(z_vals[1],4)
-        print("Values of z:", z_vals)
+        local_max = round(x_vals[1],4)
+        print("Values of z:", x_vals)
         print("Iteration: ", iter_count)
         print("Local Maximum x value:", local_max, "Function Value at Local Maximum:", round(func(local_max),4))
 
